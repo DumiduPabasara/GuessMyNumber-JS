@@ -14,7 +14,13 @@ document.querySelector('.guess').value = 23;
 console.log(document.querySelector('.guess').value);
 */
 
-let secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = 0;
+// let secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+const generateSecretNumber = () =>
+  (secretNumber = Math.trunc(Math.random() * 20) + 1);
+
+generateSecretNumber();
 
 let score = 20;
 
@@ -24,6 +30,18 @@ let playerName = '';
 
 const displayMsg = function (msg) {
   document.querySelector('.message').textContent = msg;
+};
+
+const setScore = function (score) {
+  document.querySelector('.score').textContent = score;
+};
+
+const setBodyBackgroundColor = color =>
+  (document.querySelector('body').style.backgroundColor = color);
+
+const setCheckButtonVisibility = (visibility, isDisable) => {
+  document.querySelector('.check').style.visibility = visibility;
+  document.querySelector('.check').disabled = isDisable;
 };
 
 window.addEventListener('load', function () {
@@ -46,7 +64,8 @@ document.querySelector('.check').addEventListener('click', function () {
     // document.querySelector('.message').textContent = '🎉 Correct Number!';
     displayMsg('🎉 Correct Number!');
     document.querySelector('.number').textContent = secretNumber;
-    document.querySelector('body').style.backgroundColor = '#60b347';
+    // document.querySelector('body').style.backgroundColor = '#60b347';
+    setBodyBackgroundColor('#60b347');
     document.querySelector('.number').style.width = '30rem';
 
     if (score > highScore) {
@@ -61,14 +80,18 @@ document.querySelector('.check').addEventListener('click', function () {
       // guess > secretNumber ? '📈 Too High!' : '📉 Too Low!';
       displayMsg(guess > secretNumber ? '📈 Too High!' : '📉 Too Low!');
       score--;
-      document.querySelector('.score').textContent = score;
+      // document.querySelector('.score').textContent = score;
+      setScore(score);
     } else {
       // document.querySelector('.message').textContent = '💥 You lost the game!';
       displayMsg('💥 You lost the game!');
-      document.querySelector('.score').textContent = 0;
-      document.querySelector('body').style.backgroundColor = 'red';
-      document.querySelector('.check').style.visibility = 'hidden';
-      document.querySelector('.check').disabled = true;
+      // document.querySelector('.score').textContent = 0;
+      setScore(0);
+      // document.querySelector('body').style.backgroundColor = 'red';
+      setBodyBackgroundColor('red');
+      // document.querySelector('.check').style.visibility = 'hidden';
+      // document.querySelector('.check').disabled = true;
+      setCheckButtonVisibility('hidden', true);
     }
   }
   //When number is too high
@@ -105,10 +128,12 @@ document.querySelector('.check').addEventListener('click', function () {
 document.querySelector('.again').addEventListener('click', function () {
   //reset score
   score = 20;
-  document.querySelector('.score').textContent = score;
+  // document.querySelector('.score').textContent = score;
+  setScore(score);
 
   //reset secret Number
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  // secretNumber = Math.trunc(Math.random() * 20) + 1;
+  generateSecretNumber();
 
   //reset message
   // document.querySelector('.message').textContent = 'Start guessing...';
@@ -121,10 +146,12 @@ document.querySelector('.again').addEventListener('click', function () {
   document.querySelector('.guess').value = '';
 
   //reset styles
-  document.querySelector('body').style.backgroundColor = '#222';
+  // document.querySelector('body').style.backgroundColor = '#222';
+  setBodyBackgroundColor('#222');
   document.querySelector('.number').style.width = '15rem';
 
   //reset check button
-  document.querySelector('.check').style.visibility = 'visible';
-  document.querySelector('.check').disabled = false;
+  // document.querySelector('.check').style.visibility = 'visible';
+  // document.querySelector('.check').disabled = false;
+  setCheckButtonVisibility('visible', false);
 });
