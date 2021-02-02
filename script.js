@@ -31,10 +31,11 @@ document.querySelector('.check').addEventListener('click', function () {
     if (score > 1) {
       document.querySelector('.message').textContent = '📈 Too High!';
       score--;
-      documt.queenrySelector('.score').textContent = score;
+      document.querySelector('.score').textContent = score;
     } else {
       document.querySelector('.message').textContent = '💥 You lost the game!';
       document.querySelector('.score').textContent = 0;
+      document.querySelector('.check').disabled = true;
     }
   } else if (guess < secretNumber) {
     if (score > 1) {
@@ -44,6 +45,7 @@ document.querySelector('.check').addEventListener('click', function () {
     } else {
       document.querySelector('.message').textContent = '💥 You lost the game!';
       document.querySelector('.score').textContent = 0;
+      document.querySelector('.check').disabled = true;
     }
   }
 });
