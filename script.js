@@ -31,13 +31,14 @@ window.addEventListener('load', function () {
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess, typeof guess);
-
+  document.getElementById('click').play();
   //When there is no input
   if (!guess) {
     document.querySelector('.message').textContent = '⛔ No Number!';
 
     //When player wins
   } else if (guess === secretNumber) {
+    document.getElementById('myAudio').play();
     document.querySelector('.message').textContent = '🎉 Correct Number!';
     document.querySelector('.number').textContent = secretNumber;
     document.querySelector('body').style.backgroundColor = '#60b347';
